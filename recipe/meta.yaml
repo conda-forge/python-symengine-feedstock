@@ -26,6 +26,8 @@ requirements:
     - python
     - cython
     - setuptools
+    - pytest
+    - sympy
   run:
     - symengine     0.3.0
     - python
