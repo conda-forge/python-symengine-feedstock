@@ -15,8 +15,7 @@ build:
 requirements:
   build:
     - cmake
-    - clangdev
-    - libcxx
+    - {{ compiler('cxx') }}
   host:
     - symengine     0.3.0
     - gmp           # [unix]
@@ -35,6 +34,7 @@ requirements:
     - mpir          # [win]
     - mpfr
     - mpc
+    - libcxx 4.0.1  # [osx]
 
 test:
   requires:
