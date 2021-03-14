@@ -7,12 +7,9 @@ package:
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
   sha256: 6a83cb044a1b34cc90325de2c8c60813dcf06948fb4d7380c2e719eb4b6b60ad
-  patches:
-    - gh341.patch
 
 build:
   number: 0
-  skip: true  # [win and not py>=35]
 
 requirements:
   build:
