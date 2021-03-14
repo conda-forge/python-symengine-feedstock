@@ -1,4 +1,4 @@
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 
 package:
   name: python-symengine
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
-  sha256: 8da65b0a693d19b0030461c655a223d20a9164d7d04dd1317c41d6988dc1ec96
+  sha256: 6a83cb044a1b34cc90325de2c8c60813dcf06948fb4d7380c2e719eb4b6b60ad
   patches:
     - gh341.patch
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win and not py>=35]
 
 requirements:
