@@ -14,4 +14,4 @@ $PYTHON -m pip install . \
   --global-option="build_ext" \
   --global-option="--symengine-dir=$PREFIX" \
   --global-option="build_ext" \
-  $PYTHON_ARGS
+  --global-option="$PYTHON_ARGS"
