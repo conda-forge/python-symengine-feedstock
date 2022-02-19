@@ -1,4 +1,4 @@
-{% set version = "0.8.1" %}
+{% set version = "0.9.0" %}
 
 package:
   name: python-symengine
@@ -6,16 +6,19 @@ package:
 
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
-  sha256: 02fe79e6d5e9b39a1d4e6fee05a2c1d1b10fd032157c7738ed97e32406ffb087
+  sha256: d4d4580f73cd0c00ea0824a7410398a866e0484086f97367409dd868c0fee9ea
+  patches:
+    - gh389.patch
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
+    - pip                                    # [build_platform != target_platform]
     - cmake
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -31,6 +34,7 @@ requirements:
     - python
     - cython
     - setuptools
+    - pip
   run:
     - {{ pin_compatible("symengine", max_pin="x.x") }}
     - python
