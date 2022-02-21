@@ -7,8 +7,6 @@ package:
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
   sha256: 8a96ff79fe9fc5132b32de769b44d1dcbfad31e9f9ec88924a3eee21e7aed93b
-  patches:
-    - gh389.patch
 
 build:
   number: 0
