@@ -2,6 +2,8 @@
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     sed -i.bak '1s@.*@#!/usr/bin/env python@' $BUILD_PREFIX/bin/cython
+    sed -i.bak '1s@.*@#!/usr/bin/env python@' $PREFIX/bin/cython
+    rm $PREFIX/bin/cython.bak
 fi
 
 PYTHON_ARGS="-D IGNORE_THIS=1"
