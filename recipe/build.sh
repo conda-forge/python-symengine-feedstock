@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
+    sed -i.bak '1s@.*@#!/usr/bin/env python@' $BUILD_PREFIX/bin/cython
+fi
+
 PYTHON_ARGS="-D IGNORE_THIS=1"
 for ARG in $CMAKE_ARGS; do
   if [[ "$ARG" == "-DCMAKE_"* ]] && [[ "$ARG" != *";"* ]]; then
