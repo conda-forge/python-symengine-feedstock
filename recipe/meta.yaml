@@ -1,4 +1,4 @@
-{% set version = "0.10.0" %}
+{% set version = "0.11.0" %}
 
 package:
   name: python-symengine
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
-  sha256: 923944ab54aa0a787629424c101f5ec6a87b44177c669d21c7d3b0257f725927
+  sha256: 702fc5e5640e81714eacecf9da03ba1d9cc2f49fc8c4c6154b57d3d7dfacc698
 
 build:
   number: 0
@@ -17,7 +17,6 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - pip                                    # [build_platform != target_platform]
-    - setuptools <60                         # [build_platform != target_platform]
     - cmake
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -32,7 +31,6 @@ requirements:
     - libflint
     - python
     - cython
-    - setuptools <60
     - pip
   run:
     - {{ pin_compatible("symengine", max_pin="x.x") }}
