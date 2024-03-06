@@ -9,7 +9,7 @@ source:
   sha256: 702fc5e5640e81714eacecf9da03ba1d9cc2f49fc8c4c6154b57d3d7dfacc698
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -32,6 +32,7 @@ requirements:
     - python
     - cython
     - pip
+    - zstd
   run:
     - {{ pin_compatible("symengine", max_pin="x.x") }}
     - python
