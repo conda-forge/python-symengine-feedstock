@@ -33,6 +33,7 @@ requirements:
     - python
     - cython
     - pip
+    - setuptools
   run:
     - {{ pin_compatible("symengine", max_pin="x.x") }}
     - python
