@@ -16,8 +16,5 @@ for ARG in $CMAKE_ARGS; do
   fi
 done
 
-$PYTHON -m pip install . \
-  --global-option="build_ext" \
-  --global-option="--symengine-dir=$PREFIX" \
-  --global-option="build_ext" \
-  --global-option="$PYTHON_ARGS"
+$PYTHON setup.py build_ext --symengine-dir=$PREFIX $PYTHON_ARGS bdist_wheel
+$PYTHON -m pip install dist/symengine*.whl
