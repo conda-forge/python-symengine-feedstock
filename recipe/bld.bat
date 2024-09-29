@@ -1,7 +1,2 @@
-pip install . ^
-  --global-option="build_ext" ^
-  --global-option="--generator=Ninja" ^
-  --global-option="build_ext" ^
-  --global-option="--symengine-dir=%LIBRARY_PREFIX%" ^
-  -vv
-  
+%PYTHON% setup.py build_ext --generator=Ninja --symengine-dir=%LIBRARY_PREFIX% bdist_wheel -vv
+%PYTHON% -m pip install dist\symengine*.whl
