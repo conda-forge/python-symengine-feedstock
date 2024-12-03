@@ -26,23 +26,17 @@ requirements:
     - ninja  # [win]
   host:
     - symengine     {{ ".".join(version.split(".")[:2]) }}
-    - gmp           # [unix]
-    - gmp          # [win]
+    - gmp
     - mpfr
     - mpc
     - libflint
+    - winpthreads-devel  # [win]
     - python
     - cython
     - pip
     - setuptools
   run:
-    - {{ pin_compatible("symengine", max_pin="x.x") }}
     - python
-    - gmp           # [unix]
-    - gmp          # [win]
-    - mpfr
-    - mpc
-    - libflint
 
 test:
   requires:
