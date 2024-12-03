@@ -30,7 +30,7 @@ requirements:
     - mpfr
     - mpc
     - libflint
-    - winpthreads-devel  # [win]
+    # - winpthreads-devel  # [win]
     - python
     - cython
     - pip
