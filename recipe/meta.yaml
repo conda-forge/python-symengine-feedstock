@@ -1,4 +1,4 @@
-{% set version = "0.13.0" %}
+{% set version = "0.14.0" %}
 
 package:
   name: python-symengine
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://github.com/symengine/symengine.py/archive/v{{ version }}.tar.gz
-  sha256: fa48beb9b8d4574482edf19dc8671d4cb78f53c2511047a0e52bb88fbdeb6d0c
+  sha256: 38e742a9b3d03b36f07b2ccba39e7e3d626e37557c26bb03ce575b95cfbd9cc4
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
