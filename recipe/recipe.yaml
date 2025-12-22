@@ -14,7 +14,7 @@ source:
 build:
   number: 2
   script:
-    file: build-symengine
+    file: build-python-symengine
 
 requirements:
   build:
@@ -41,7 +41,7 @@ requirements:
     - pip
     - python
     - setuptools
-    - symengine ${{ (version | split("."))[:2] | join(".") }}
+    - symengine ${{ (version | split("."))[:2] | join(".") }}.*
   run:
     - python
 
