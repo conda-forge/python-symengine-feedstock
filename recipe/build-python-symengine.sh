@@ -17,4 +17,4 @@ for ARG in $CMAKE_ARGS; do
 done
 
 $PYTHON setup.py build_ext --symengine-dir=$PREFIX $PYTHON_ARGS bdist_wheel
-$PYTHON -m pip install dist/symengine*.whl
+$PYTHON -m pip install dist/symengine*.whl --no-deps --no-build-isolation --disable-pip-version-check
