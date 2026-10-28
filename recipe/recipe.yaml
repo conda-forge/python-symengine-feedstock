@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.14.1"
+  version: "0.15.0"
 
 package:
   name: python-symengine
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://github.com/symengine/symengine.py/archive/v${{ version }}.tar.gz
-  sha256: 3e79d39af5e9f024cd4b8d1372314ac2b83cace7d49cdbad482b4aec5b04c37b
+  sha256: dd0e02b5ee81e9e30a87d6ba64435fa934d4b88faa044650caa4ca619eac4c62
 
 build:
-  number: 3
+  number: 0
   script:
     file: build-python-symengine
 
