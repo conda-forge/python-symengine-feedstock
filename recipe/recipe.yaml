@@ -17,8 +17,13 @@ source:
 
 build:
   number: 0
+  skip: is_abi3 and not is_python_min
+  python:
+    version_independent: ${{ is_abi3 }}
   script:
     file: build-python-symengine
+    env:
+      SKBUILD_WHEEL_PY_API: ${{ "cp" ~ (python_min | replace(".", "")) if is_abi3 else "" }}
 
 requirements:
   build:
@@ -47,6 +52,8 @@ requirements:
     - mpfr
     - pip
     - python
+    - if: is_abi3
+      then: python-abi3
     - scikit-build-core
     - setuptools-scm
     - symengine ${{ (version | split("."))[:2] | join(".") }}.*
@@ -57,6 +64,10 @@ tests:
   - python:
       imports: symengine
       pip_check: true
+      python_version:
+        - if: is_abi3
+          then: ${{ python_min }}.*
+        - "*"
   - requirements:
       run:
         - pytest
@@ -67,6 +78,15 @@ tests:
         import symengine
         if not symengine.test():
             raise Exception("Tests failed")
+  - if: is_abi3
+    then:
+      requirements:
+        run:
+          - abi3audit
+      script:
+        - if: unix
+          then: abi3audit $SP_DIR/symengine/lib/symengine_wrapper.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          else: abi3audit %SP_DIR%\symengine\lib\symengine_wrapper.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
 
 about:
   license: MIT
