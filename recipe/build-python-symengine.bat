@@ -1,5 +1,5 @@
-%PYTHON% setup.py build_ext --generator=Ninja --symengine-dir=%LIBRARY_PREFIX% bdist_wheel -vv
-
-for %%f in (dist\*.whl) do (
-  %PYTHON% -m pip install %%f -vv
-)
+set "CMAKE_GENERATOR="
+set "CMAKE_GENERATOR_PLATFORM="
+set "CMAKE_GENERATOR_TOOLSET="
+%PYTHON% -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check -Ccmake.define.SymEngine_DIR=%LIBRARY_PREFIX%
+if errorlevel 1 exit 1

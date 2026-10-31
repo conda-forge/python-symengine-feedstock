@@ -2,20 +2,28 @@
 schema_version: 1
 
 context:
-  version: "0.14.1"
+  version: "0.15.0"
 
 package:
   name: python-symengine
   version: ${{ version }}
 
 source:
-  url: https://github.com/symengine/symengine.py/archive/v${{ version }}.tar.gz
-  sha256: 3e79d39af5e9f024cd4b8d1372314ac2b83cace7d49cdbad482b4aec5b04c37b
+  url: https://github.com/symengine/symengine.py/releases/download/v${{ version }}/symengine.py-${{ version }}.tar.gz
+  sha256: 5fac75a1b347308ba8b6e33b0bf74c5235446e268b3d023f80c02e1a873a7c18
+  patches:
+    # restore qualified Cython module name (from symengine/symengine-wheels)
+    - 6344a52.patch
 
 build:
-  number: 3
+  number: 0
+  skip: is_abi3 and not is_python_min
+  python:
+    version_independent: ${{ is_abi3 }}
   script:
     file: build-python-symengine
+    env:
+      SKBUILD_WHEEL_PY_API: ${{ "cp" ~ (python_min | replace(".", "")) if is_abi3 else "" }}
 
 requirements:
   build:
@@ -26,22 +34,28 @@ requirements:
     - if: build_platform != target_platform
       then:
         - cross-python_${{ target_platform }}
-        - cython
+        - cython >=3.1
+        - cython-cmake
         - pip
         - python
-        - setuptools
+        - scikit-build-core
+        - setuptools-scm
     - if: unix
       then: make
       else: ninja
   host:
-    - cython
+    - cython >=3.1
+    - cython-cmake
     - gmp
     - libflint
     - mpc
     - mpfr
     - pip
     - python
-    - setuptools
+    - if: is_abi3
+      then: python-abi3
+    - scikit-build-core
+    - setuptools-scm
     - symengine ${{ (version | split("."))[:2] | join(".") }}.*
   run:
     - python
@@ -50,6 +64,10 @@ tests:
   - python:
       imports: symengine
       pip_check: true
+      python_version:
+        - if: is_abi3
+          then: ${{ python_min }}.*
+        - "*"
   - requirements:
       run:
         - pytest
@@ -60,6 +78,15 @@ tests:
         import symengine
         if not symengine.test():
             raise Exception("Tests failed")
+  - if: is_abi3
+    then:
+      requirements:
+        run:
+          - abi3audit
+      script:
+        - if: unix
+          then: abi3audit $SP_DIR/symengine/lib/symengine_wrapper.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          else: abi3audit %SP_DIR%\symengine\lib\symengine_wrapper.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
 
 about:
   license: MIT

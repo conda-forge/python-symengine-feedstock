@@ -10,6 +10,10 @@ cxx_compiler:
 - vs2022
 gmp:
 - '6'
+is_abi3:
+- true
+is_python_min:
+- true
 libflint:
 - '3.5'
 mpfr:
@@ -19,9 +23,12 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.13.* *_cp313
+- 3.11.* *_cpython
+python_min:
+- '3.11'
 target_platform:
 - win-64
 zip_keys:
 - - python
-  - channel_sources
+  - is_python_min
+  - is_abi3
