@@ -9,8 +9,11 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/symengine/symengine.py/archive/v${{ version }}.tar.gz
-  sha256: dd0e02b5ee81e9e30a87d6ba64435fa934d4b88faa044650caa4ca619eac4c62
+  url: https://github.com/symengine/symengine.py/releases/download/v${{ version }}/symengine.py-${{ version }}.tar.gz
+  sha256: 5fac75a1b347308ba8b6e33b0bf74c5235446e268b3d023f80c02e1a873a7c18
+  patches:
+    # restore qualified Cython module name (from symengine/symengine-wheels)
+    - 6344a52.patch
 
 build:
   number: 0
@@ -26,22 +29,26 @@ requirements:
     - if: build_platform != target_platform
       then:
         - cross-python_${{ target_platform }}
-        - cython
+        - cython >=3.1
+        - cython-cmake
         - pip
         - python
-        - setuptools
+        - scikit-build-core
+        - setuptools-scm
     - if: unix
       then: make
       else: ninja
   host:
-    - cython
+    - cython >=3.1
+    - cython-cmake
     - gmp
     - libflint
     - mpc
     - mpfr
     - pip
     - python
-    - setuptools
+    - scikit-build-core
+    - setuptools-scm
     - symengine ${{ (version | split("."))[:2] | join(".") }}.*
   run:
     - python
