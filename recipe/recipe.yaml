@@ -16,7 +16,7 @@ source:
     - 6344a52.patch
 
 build:
-  number: 0
+  number: 1
   skip: is_abi3 and not is_python_min
   python:
     version_independent: ${{ is_abi3 }}

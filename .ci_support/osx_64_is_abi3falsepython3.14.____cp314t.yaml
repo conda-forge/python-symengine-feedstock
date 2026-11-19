@@ -23,7 +23,7 @@ is_abi3:
 is_python_min:
 - false
 libflint:
-- '3.5'
+- '3.6'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpfr:
